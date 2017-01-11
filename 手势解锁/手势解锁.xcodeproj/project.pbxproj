@@ -29,6 +29,7 @@
 		11EF18431E264F68008626AA /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 11EF18311E264F68008626AA /* SVProgressHUD.bundle */; };
 		11EF18441E264F68008626AA /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF18331E264F68008626AA /* SVProgressHUD.m */; };
 		11EF18451E264F68008626AA /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF18351E264F68008626AA /* SVRadialGradientLayer.m */; };
+		11EF18481E2650F7008626AA /* BLUnlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF18471E2650F7008626AA /* BLUnlockView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,8 @@
 		11EF18331E264F68008626AA /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		11EF18341E264F68008626AA /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		11EF18351E264F68008626AA /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		11EF18461E2650F7008626AA /* BLUnlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLUnlockView.h; sourceTree = "<group>"; };
+		11EF18471E2650F7008626AA /* BLUnlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLUnlockView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				11EF17FD1E264AE3008626AA /* Main.storyboard */,
+				11EF18461E2650F7008626AA /* BLUnlockView.h */,
+				11EF18471E2650F7008626AA /* BLUnlockView.m */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				11EF18411E264F68008626AA /* SVIndefiniteAnimatedView.m in Sources */,
 				11EF17F91E264AE3008626AA /* AppDelegate.m in Sources */,
 				11EF183A1E264F68008626AA /* MASLayoutConstraint.m in Sources */,
+				11EF18481E2650F7008626AA /* BLUnlockView.m in Sources */,
 				11EF17F61E264AE3008626AA /* main.m in Sources */,
 				11EF18441E264F68008626AA /* SVProgressHUD.m in Sources */,
 				11EF18401E264F68008626AA /* ViewController+MASAdditions.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "BLUnlockView.h"
 #import "Masonry.h"
 
 @interface ViewController ()
@@ -24,7 +25,7 @@
 #pragma mark - 搭建界面
 - (void)setupUI {
     
-    // 设置背景
+    // 1.设置背景
     UIImage *image = [UIImage imageNamed:@"Home_refresh_bg"];
     UIImageView *imageV = [[UIImageView alloc]initWithImage:image];
     
@@ -32,6 +33,17 @@
     
     [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
+    }];
+    
+    // 2.添加解锁视图
+    BLUnlockView *unlockV = [[BLUnlockView alloc]init];
+    unlockV.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:unlockV];
+    
+    [unlockV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(300, 300));
     }];
 }
 
