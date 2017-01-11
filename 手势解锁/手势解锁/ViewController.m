@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Masonry.h"
 
 @interface ViewController ()
 
@@ -16,13 +17,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self setupUI];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 搭建界面
+- (void)setupUI {
+    
+    // 设置背景
+    UIImage *image = [UIImage imageNamed:@"Home_refresh_bg"];
+    UIImageView *imageV = [[UIImageView alloc]initWithImage:image];
+    
+    [self.view addSubview:imageV];
+    
+    [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 
