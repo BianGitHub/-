@@ -75,6 +75,9 @@
     } else{
         NSLog(@"输入错误, 请重新输入");
         [SVProgressHUD showInfoWithStatus:@"输入错误, 请重新输入"];
+        
+        // 清除线
+        [lockView clearScreen];
     }
 }
 

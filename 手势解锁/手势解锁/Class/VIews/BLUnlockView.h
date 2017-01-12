@@ -19,4 +19,7 @@
 
 @property(nonatomic, weak) id<BLUnlockViewDelegate> delegate;
 
+// 清除线
+- (void)clearScreen;
+
 @end

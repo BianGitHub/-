@@ -138,6 +138,22 @@
     [path stroke];
 }
 
+#pragma mark - 清除线
+- (void)clearScreen
+{
+    // 把集合中的按钮移除, 然后重绘, 移除之前恢复按钮状态
+    [_btnArrM enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        obj.selected = NO;
+        
+    }];
+    
+    [_btnArrM removeAllObjects];
+    
+    // 重绘制
+    [self setNeedsDisplay];
+}
+
 #pragma mark - 布局子控件按钮
 - (void)layoutSubviews
 {
