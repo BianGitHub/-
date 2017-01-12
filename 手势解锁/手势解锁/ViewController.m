@@ -39,7 +39,7 @@
     // 2.添加解锁视图
     BLUnlockView *unlockV = [[BLUnlockView alloc]init];
     unlockV.delegate = self;
-    unlockV.backgroundColor = [UIColor whiteColor];
+    unlockV.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:unlockV];
     

@@ -12,6 +12,9 @@
 {
     // 保存所有触碰的按钮集合
     NSMutableArray<UIButton *> *_btnArrM;
+    
+    // 记录当前点
+    CGPoint _currentP;
 }
 
 // 代码创建视图时调用
@@ -62,6 +65,9 @@
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStateChanged:
         {
+            // 记录当前点
+            _currentP = loc;
+            
             // 开始触摸 -> 记录当前触摸点
             [self.subviews enumerateObjectsUsingBlock:^(__kindof UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
@@ -130,9 +136,19 @@
         [path addLineToPoint:obj.center];
     }];
     
+    // 添加最后一根线
+    if (_btnArrM.count > 0) {
+        [path addLineToPoint:_currentP];
+    }
+    
     //设置线宽和颜色
     path.lineWidth = 10;
-    [[UIColor blackColor] setStroke];
+    
+    //设置 线头 和 接头 样式
+    path.lineCapStyle = kCGLineCapRound;
+    path.lineJoinStyle = kCGLineJoinRound;
+    
+    [[UIColor whiteColor] setStroke];
     
     //3. 渲染
     [path stroke];
