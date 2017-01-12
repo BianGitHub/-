@@ -97,6 +97,11 @@
             }];
             
             NSLog(@"%@", pwd);
+            
+            // 判断密码是否正确, 并提示
+            if ([_delegate respondsToSelector:@selector(unlockView:didFinishPwd:)]) {
+                [_delegate unlockView:self didFinishPwd:pwd];
+            }
         }
             break;
         case UIGestureRecognizerStateCancelled:

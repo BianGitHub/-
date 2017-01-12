@@ -10,7 +10,7 @@
 #import "BLUnlockView.h"
 #import "Masonry.h"
 
-@interface ViewController ()
+@interface ViewController ()<BLUnlockViewDelegate>
 
 @end
 
@@ -37,6 +37,7 @@
     
     // 2.添加解锁视图
     BLUnlockView *unlockV = [[BLUnlockView alloc]init];
+    unlockV.delegate = self;
     unlockV.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:unlockV];
@@ -47,5 +48,29 @@
     }];
 }
 
+#pragma mark -BLUnlockViewDelegate
+- (void)unlockView:(BLUnlockView *)lockView didFinishPwd:(NSString *)pwd
+{
+    // 判断是否是第一次
+    // 1.读取密码 - 如果有值, 不是第一次, 如果没有值, 是第一次
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // 读取密码
+    NSString *savePWD = [defaults objectForKey:@"pwd"];
+    
+    if (savePWD.length == 0) {
+        // 存储
+        [defaults setObject:pwd forKey:@"pwd"];
+        NSLog(@"保存成功");
+        return;
+    }
+    
+    // 2.比较
+    if ([savePWD isEqualToString:pwd]) {
+        NSLog(@"正确");
+    } else{
+        NSLog(@"输入错误, 请重新输入");
+    }
+}
 
 @end
