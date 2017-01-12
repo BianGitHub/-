@@ -25,6 +25,8 @@
     for (NSInteger i = 0; i < 9; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
+        // 关闭按钮的用户交互
+        btn.userInteractionEnabled = NO;
         // 普通状态
         [btn setImage:[UIImage imageNamed:@"gesture_node_normal"] forState:UIControlStateNormal];
         // 选中状态
@@ -32,6 +34,51 @@
         // 错误状态
         [btn setImage:[UIImage imageNamed:@"gesture_node_error"] forState:UIControlStateDisabled];
         [self addSubview:btn];
+    }
+    
+    // 添加长按手势
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressAction:)];
+    // 设置长按手势的出发时间
+    longPress.minimumPressDuration = 0.1;
+    
+    [self addGestureRecognizer:longPress];
+}
+
+#pragma mark - 长安手势监听方法
+- (void)longPressAction: (UILongPressGestureRecognizer *)recognizer
+{
+    // 1.获取用户的触摸点
+    CGPoint loc = [recognizer locationInView:self];
+    
+    // 2.根据状态执行不同的操作
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateChanged:
+        {
+            // 开始触摸 -> 记录当前触摸点
+            [self.subviews enumerateObjectsUsingBlock:^(__kindof UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                // 判断触摸点是否在按钮身上
+                BOOL isContain = CGRectContainsPoint(obj.frame, loc);
+                
+                // obj.selected == NO -> 防止重复设置按钮
+                if (isContain && obj.selected == NO) {
+                    obj.selected = YES;
+                    NSLog(@"%@", @(idx));
+                }
+                
+            }];
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+            break;
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed:
+            
+            break;
+            
+        default:
+            break;
     }
 }
 
