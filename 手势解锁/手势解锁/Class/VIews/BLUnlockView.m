@@ -9,6 +9,10 @@
 #import "BLUnlockView.h"
 
 @implementation BLUnlockView
+{
+    // 保存所有触碰的按钮集合
+    NSMutableArray<UIButton *> *_btnArrM;
+}
 
 // 代码创建视图时调用
 - (instancetype)initWithFrame:(CGRect)frame
@@ -42,6 +46,9 @@
     longPress.minimumPressDuration = 0.1;
     
     [self addGestureRecognizer:longPress];
+    
+    // 实例化
+    _btnArrM = [NSMutableArray array];
 }
 
 #pragma mark - 长安手势监听方法
@@ -61,13 +68,19 @@
                 // 判断触摸点是否在按钮身上
                 BOOL isContain = CGRectContainsPoint(obj.frame, loc);
                 
-                // obj.selected == NO -> 防止重复设置按钮
+                // obj.selected == NO -> 防止重复设置按钮******
                 if (isContain && obj.selected == NO) {
                     obj.selected = YES;
                     NSLog(@"%@", @(idx));
+                    
+                    // 将被选中的按钮放入集合
+                    [_btnArrM addObject:obj];
                 }
                 
             }];
+            
+            // 重绘   -> 让视图执行drawRext方法
+            [self setNeedsDisplay];
         }
             break;
         case UIGestureRecognizerStateEnded:
@@ -80,6 +93,30 @@
         default:
             break;
     }
+}
+
+#pragma mark - 绘图
+- (void)drawRect:(CGRect)rect
+{
+    // 将集合中所有的按钮连线
+    //  1.创建路径
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    // 2.遍历
+    [_btnArrM enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        // 设置起点
+        if(idx == 0)
+        {
+            [path moveToPoint:obj.center];
+        }
+        [path addLineToPoint:obj.center];
+    }];
+    
+    //设置线宽和颜色
+    path.lineWidth = 10;
+    [[UIColor blackColor] setStroke];
+    
+    //3. 渲染
+    [path stroke];
 }
 
 #pragma mark - 布局子控件按钮
