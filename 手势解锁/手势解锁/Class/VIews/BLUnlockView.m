@@ -84,6 +84,20 @@
         }
             break;
         case UIGestureRecognizerStateEnded:
+        {
+            NSLog(@"松手 判断是否正确");
+            // 拼接密码
+            NSMutableString *pwd = [NSMutableString string];
+            
+            [_btnArrM enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                // 获取obj按钮在当前视图的子控件数组中的索引
+                NSInteger btnIdx = [self.subviews indexOfObject:obj];
+                [pwd appendFormat:@"%@",@(btnIdx)];
+            }];
+            
+            NSLog(@"%@", pwd);
+        }
             break;
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
