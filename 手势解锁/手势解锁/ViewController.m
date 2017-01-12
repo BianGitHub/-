@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "BLUnlockView.h"
 #import "Masonry.h"
+#import "SVProgressHUD.h"
 
 @interface ViewController ()<BLUnlockViewDelegate>
 
@@ -58,18 +59,22 @@
     // 读取密码
     NSString *savePWD = [defaults objectForKey:@"pwd"];
     
+    //设置消失的时间
+    [SVProgressHUD setMinimumDismissTimeInterval:0.5];
     if (savePWD.length == 0) {
         // 存储
         [defaults setObject:pwd forKey:@"pwd"];
         NSLog(@"保存成功");
+        [SVProgressHUD showSuccessWithStatus:@"存储成功"];
         return;
     }
-    
     // 2.比较
     if ([savePWD isEqualToString:pwd]) {
         NSLog(@"正确");
+        [SVProgressHUD showSuccessWithStatus:@"欢迎归来"];
     } else{
         NSLog(@"输入错误, 请重新输入");
+        [SVProgressHUD showInfoWithStatus:@"输入错误, 请重新输入"];
     }
 }
 
