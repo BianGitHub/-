@@ -161,13 +161,20 @@
     [_btnArrM enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         obj.selected = NO;
+        obj.enabled = NO;
         
     }];
     
-    [_btnArrM removeAllObjects];
-    
-    // 重绘制
-    [self setNeedsDisplay];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        // 把集合中的按钮移除, 然后重绘, 移除之前恢复按钮状态
+        [_btnArrM enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.enabled = YES;
+        }];
+        [_btnArrM removeAllObjects];
+        // 重绘制
+        [self setNeedsDisplay];
+    });
 }
 
 #pragma mark - 布局子控件按钮
